@@ -3,8 +3,8 @@
 [ext_resource type="Script" uid="uid://bdjyfb5os2l3d" path="res://scripts/player.gd" id="1_g2els"]
 [ext_resource type="Texture2D" uid="uid://dogqdb01tx0co" path="res://art/characters/player.png" id="2_qhqgy"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_k0juu"]
-radius = 5.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5dllc"]
+size = Vector2(9, 2)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dqkch"]
 atlas = ExtResource("2_qhqgy")
@@ -250,7 +250,7 @@ animations = [{
 }],
 "loop": 1,
 "name": &"back_idle",
-"speed": 5.0
+"speed": 6.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -273,7 +273,7 @@ animations = [{
 }],
 "loop": 1,
 "name": &"back_walk",
-"speed": 5.0
+"speed": 6.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -287,7 +287,7 @@ animations = [{
 }],
 "loop": 1,
 "name": &"faint",
-"speed": 5.0
+"speed": 3.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -304,7 +304,7 @@ animations = [{
 }],
 "loop": 1,
 "name": &"front_attack",
-"speed": 5.0
+"speed": 4.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -327,7 +327,7 @@ animations = [{
 }],
 "loop": 1,
 "name": &"front_idle",
-"speed": 5.0
+"speed": 6.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -350,7 +350,7 @@ animations = [{
 }],
 "loop": 1,
 "name": &"front_walk",
-"speed": 5.0
+"speed": 6.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -367,7 +367,7 @@ animations = [{
 }],
 "loop": 1,
 "name": &"side_attack",
-"speed": 5.0
+"speed": 4.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -390,7 +390,7 @@ animations = [{
 }],
 "loop": 1,
 "name": &"side_idle",
-"speed": 5.0
+"speed": 6.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -413,16 +413,29 @@ animations = [{
 }],
 "loop": 1,
 "name": &"side_walk",
-"speed": 5.0
+"speed": 6.0
 }]
 
 [node name="Player" type="CharacterBody2D" unique_id=375576792]
 script = ExtResource("1_g2els")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=61128836]
-shape = SubResource("CircleShape2D_k0juu")
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_5dllc")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=708958941]
 position = Vector2(0, -17)
 sprite_frames = SubResource("SpriteFrames_5dllc")
-animation = &"front_idle"
+animation = &"back_attack"
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1270662568]
+limit_left = 0
+limit_top = 0
+limit_right = 384
+limit_bottom = 208
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+drag_left_margin = 0.15
+drag_top_margin = 0.15
+drag_right_margin = 0.15
+drag_bottom_margin = 0.15

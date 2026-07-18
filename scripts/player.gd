@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-const speed =100
+const speed = 70
 var current_direction = "none"
 
 func _ready() -> void:
@@ -32,7 +32,6 @@ func player_movement(delta: float) -> void:
 		velocity.x = 0
 		velocity.y = speed
 	else:
-		#current_direction = "none"
 		play_animation(false)
 		velocity.x = 0
 		velocity.y = 0
@@ -46,28 +45,28 @@ func play_animation(movement: bool) -> void:
 	
 	if direction == "right":
 		animation.flip_h = false
-		if movement == true:
+		if movement:
 			animation.play("side_walk")
-		elif movement == false:
+		else:
 			animation.play("side_idle")
 	
 	if direction == "left":
 		animation.flip_h = true
-		if movement == true:
+		if movement:
 			animation.play("side_walk")
-		elif movement == false:
+		else:
 			animation.play("side_idle")
 	
 	if direction == "up":
 		animation.flip_h = false
-		if movement == true:
+		if movement:
 			animation.play("back_walk")
-		elif movement == false:
+		else:
 			animation.play("back_idle")
 	
 	if direction == "down":
 		animation.flip_h = false
-		if movement == true:
+		if movement:
 			animation.play("front_walk")
-		elif movement == false:
+		else:
 			animation.play("front_idle")

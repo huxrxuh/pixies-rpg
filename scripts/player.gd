@@ -3,7 +3,7 @@ extends CharacterBody2D
 const speed =100
 var current_direction = "none"
 
-func _ready():
+func _ready() -> void:
 	$AnimatedSprite2D.play("front_idle")
 
 func _physics_process(delta: float) -> void:

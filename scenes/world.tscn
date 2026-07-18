@@ -4,6 +4,9 @@
 [ext_resource type="TileSet" uid="uid://c6vrh4pwaeudj" path="res://tilesets/world.tres" id="2_4wyf3"]
 [ext_resource type="PackedScene" uid="uid://drs3cgwe4l8ih" path="res://scenes/player.tscn" id="3_4wyf3"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5dllc"]
+size = Vector2(138, 20)
+
 [node name="Node2D" type="Node2D" unique_id=806962730]
 y_sort_enabled = true
 script = ExtResource("1_rwgxs")
@@ -25,8 +28,16 @@ y_sort_enabled = true
 tile_map_data = PackedByteArray("AAAEAAkAAwAKAAcAAAALAAUAAwAAAAUAAAAEAP//AwAIAAYAAAAJAP//AwAIAAYAAAARAP//AwAIAAYAAAABAAYAAwAGAAcAAAAOAAkAAwAGAAcAAAAOAAsAAwAGAAcAAAAQAAYAAwAKAAcAAAAVAAgAAwAKAAcAAAASAAsAAwAKAAcAAAABAAoAAwAKAAcAAAAWAAoAAwAAAAUAAAAFAAIAAwAAAAEAAAAHAAIAAwAAAAEAAAADAAoAAwAAAAEAAAACAAwAAwAAAAEAAAASAAgAAwAAAAEAAAA=")
 tile_set = ExtResource("2_4wyf3")
 
-[node name="Player" parent="." unique_id=375576792 instance=ExtResource("3_4wyf3")]
-position = Vector2(199, 24)
+[node name="player" parent="." unique_id=375576792 instance=ExtResource("3_4wyf3")]
+position = Vector2(186, 206)
 
 [node name="Marker2D" type="Marker2D" parent="." unique_id=2101056054]
-position = Vector2(384, 208)
+position = Vector2(202, 208)
+
+[node name="camp_exit" type="Area2D" parent="." unique_id=576949113]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="camp_exit" unique_id=581204601]
+position = Vector2(192, 218)
+shape = SubResource("RectangleShape2D_5dllc")
+
+[connection signal="body_entered" from="camp_exit" to="." method="_on_camp_exit_body_entered"]

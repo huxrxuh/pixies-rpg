@@ -227,7 +227,7 @@ animations = [{
 }],
 "loop": 1,
 "name": &"back_attack",
-"speed": 5.0
+"speed": 4.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -416,6 +416,9 @@ animations = [{
 "speed": 6.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_5dllc"]
+radius = 7.0
+
 [node name="Player" type="CharacterBody2D" unique_id=375576792]
 script = ExtResource("1_g2els")
 
@@ -428,7 +431,7 @@ position = Vector2(0, -17)
 sprite_frames = SubResource("SpriteFrames_5dllc")
 animation = &"back_attack"
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=1270662568]
+[node name="Camera_world" type="Camera2D" parent="." unique_id=1270662568]
 limit_left = 0
 limit_top = 0
 limit_right = 384
@@ -439,3 +442,43 @@ drag_left_margin = 0.15
 drag_top_margin = 0.15
 drag_right_margin = 0.15
 drag_bottom_margin = 0.15
+
+[node name="Camera_camp" type="Camera2D" parent="." unique_id=760252843]
+limit_left = 0
+limit_top = 0
+limit_right = 384
+limit_bottom = 208
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+drag_left_margin = 0.15
+drag_top_margin = 0.15
+drag_right_margin = 0.15
+drag_bottom_margin = 0.15
+
+[node name="player_hitbox" type="Area2D" parent="." unique_id=751250304]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player_hitbox" unique_id=411371494]
+shape = SubResource("CircleShape2D_5dllc")
+
+[node name="hp_bar" type="ProgressBar" parent="." unique_id=2038111053]
+modulate = Color(0.44313726, 1, 0.27058825, 0.7019608)
+offset_left = -7.0
+offset_top = 3.0
+offset_right = 7.0
+offset_bottom = 7.0
+show_percentage = false
+
+[node name="attack_cooldown" type="Timer" parent="." unique_id=640679478]
+wait_time = 0.5
+
+[node name="attack_timer" type="Timer" parent="." unique_id=1004254993]
+
+[node name="hp_regeneration_timer" type="Timer" parent="." unique_id=1015437433]
+wait_time = 5.0
+autostart = true
+
+[connection signal="body_entered" from="player_hitbox" to="." method="_on_player_hitbox_body_entered"]
+[connection signal="body_exited" from="player_hitbox" to="." method="_on_player_hitbox_body_exited"]
+[connection signal="timeout" from="attack_cooldown" to="." method="_on_attack_cooldown_timeout"]
+[connection signal="timeout" from="attack_timer" to="." method="_on_attack_timer_timeout"]
+[connection signal="timeout" from="hp_regeneration_timer" to="." method="_on_hp_regeneration_timer_timeout"]

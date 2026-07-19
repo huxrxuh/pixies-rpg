@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://rijr65ib5uex" path="res://scripts/world.gd" id="1_rwgxs"]
 [ext_resource type="TileSet" uid="uid://c6vrh4pwaeudj" path="res://tilesets/world.tres" id="2_4wyf3"]
 [ext_resource type="PackedScene" uid="uid://drs3cgwe4l8ih" path="res://scenes/player.tscn" id="3_4wyf3"]
+[ext_resource type="PackedScene" uid="uid://p401dpgi1" path="res://scenes/slime.tscn" id="4_k0juu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5dllc"]
 size = Vector2(138, 20)
@@ -39,5 +40,8 @@ position = Vector2(202, 208)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="camp_exit" unique_id=581204601]
 position = Vector2(192, 218)
 shape = SubResource("RectangleShape2D_5dllc")
+
+[node name="slime" parent="." unique_id=204482853 instance=ExtResource("4_k0juu")]
+position = Vector2(267, 69)
 
 [connection signal="body_entered" from="camp_exit" to="." method="_on_camp_exit_body_entered"]

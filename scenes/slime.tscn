@@ -1,0 +1,126 @@
+[gd_scene format=3 uid="uid://p401dpgi1"]
+
+[ext_resource type="Texture2D" uid="uid://cx5qhcinv4mil" path="res://art/characters/slime.png" id="1_371uh"]
+[ext_resource type="Script" uid="uid://ci1c4085upn8u" path="res://scripts/slime.gd" id="1_p2gj0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p2gj0"]
+atlas = ExtResource("1_371uh")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n6pvg"]
+atlas = ExtResource("1_371uh")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pjw23"]
+atlas = ExtResource("1_371uh")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2npkn"]
+atlas = ExtResource("1_371uh")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fd6lc"]
+atlas = ExtResource("1_371uh")
+region = Rect2(0, 128, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gstla"]
+atlas = ExtResource("1_371uh")
+region = Rect2(32, 128, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v5wyi"]
+atlas = ExtResource("1_371uh")
+region = Rect2(64, 128, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0l8pv"]
+atlas = ExtResource("1_371uh")
+region = Rect2(96, 128, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vnioy"]
+atlas = ExtResource("1_371uh")
+region = Rect2(128, 128, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2xjuo"]
+atlas = ExtResource("1_371uh")
+region = Rect2(160, 128, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5dllc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p2gj0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n6pvg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pjw23")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2npkn")
+}],
+"loop": 1,
+"name": &"idle_front",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fd6lc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gstla")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v5wyi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0l8pv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vnioy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2xjuo")
+}],
+"loop": 1,
+"name": &"walk_side",
+"speed": 6.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ielqr"]
+radius = 7.071068
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5dllc"]
+radius = 41.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vg5ol"]
+radius = 13.038404
+
+[node name="CharacterBody2D" type="CharacterBody2D" unique_id=204482853]
+script = ExtResource("1_p2gj0")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1247099460]
+position = Vector2(0, -5)
+sprite_frames = SubResource("SpriteFrames_5dllc")
+animation = &"walk_side"
+frame_progress = 0.13181661
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1071888902]
+shape = SubResource("CircleShape2D_ielqr")
+
+[node name="detection_area" type="Area2D" parent="." unique_id=527351296]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="detection_area" unique_id=420893836]
+shape = SubResource("CircleShape2D_5dllc")
+
+[node name="player_attack_range" type="Area2D" parent="." unique_id=678751454]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player_attack_range" unique_id=586203577]
+shape = SubResource("CircleShape2D_vg5ol")
+
+[node name="slime_damage_cooldown" type="Timer" parent="." unique_id=528288336]
+
+[connection signal="body_entered" from="detection_area" to="." method="_on_detection_area_body_entered"]
+[connection signal="body_exited" from="detection_area" to="." method="_on_detection_area_body_exited"]
+[connection signal="body_entered" from="player_attack_range" to="." method="_on_player_attack_range_body_entered"]
+[connection signal="body_exited" from="player_attack_range" to="." method="_on_player_attack_range_body_exited"]
+[connection signal="timeout" from="slime_damage_cooldown" to="." method="_on_slime_damage_cooldown_timeout"]
